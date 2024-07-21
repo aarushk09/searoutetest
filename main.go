@@ -3,13 +3,14 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/gin-gonic/gin"
-	geo "github.com/kellydunn/golang-geo"
-	gdj "github.com/pitchinnate/golangGeojsonDijkstra"
 	"io"
 	"log"
 	"os"
 	"strings"
+
+	"github.com/gin-gonic/gin"
+	geo "github.com/kellydunn/golang-geo"
+	gdj "github.com/pitchinnate/golangGeojsonDijkstra"
 )
 
 var PortData []Port
@@ -135,27 +136,21 @@ func main() {
 		c.JSON(200, data)
 
 	})
-
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "3333"
+	}
 	//Start and run the server if production environment
 	if os.Getenv("APP_ENV") == "prod" {
 		log.Println("Starting server in production environment")
-		err = router.RunTLS(fmt.Sprintf(":%s", os.Getenv("PORT")), os.Getenv("CERT_PATH"), os.Getenv("KEY_PATH"))
+		err = router.RunTLS(fmt.Sprintf(":%s", port), os.Getenv("CERT_PATH"), os.Getenv("KEY_PATH"))
 	} else {
 		log.Println("Starting server in development environment")
-		err = router.Run(fmt.Sprintf(":%s", os.Getenv("PORT")))
-		if err != nil {
-			log.Fatal(err)
-		}
+		err = router.Run(fmt.Sprintf(":%s", port))
 	}
-
-	// Sample data for test Shanghai-New-York
-	//var originCoords = gdj.Position{72.9301, 19.0519}
-	//var destinationCoords = gdj.Position{-9.0905, 38.7062}
-	//var routeName = "Mumbai-Lisbon"
-
-	// Calculate the passage info
-	//calculatePassageInfo(originCoords, destinationCoords, routeName)
-
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 // CalculatePassageInfo calculates the ocean waypoints and distance between two coordinates and generates a GeoJSON output
