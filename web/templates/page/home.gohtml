@@ -1,0 +1,43 @@
+{{template "top" .}}
+
+<div class="container form">
+    <form>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="input-field">
+                    <input id="from-input" type="text" name="from-input" autocomplete="off">
+                    <label for="from-input">From</label>
+                    <div class="from-autocomplete-items autocomplete-items"></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="input-field">
+                    <input id="to-input" type="text" name="to-input" autocomplete="off">
+                    <label for="to-input">To</label>
+                    <div class="to-autocomplete-items autocomplete-items"></div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="input-field">
+                    <button class="btn waves-effect waves-light blue text-light" type="submit">Calculate</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+</div>
+
+
+<button type="button" class="btn wave-effect blue btn-floating btn-circle" id="download-button" disabled>
+    <i class="fa fa-download"></i>
+</button>
+
+<button type="button" class="btn wave-effect blue btn-floating btn-circle" id="clear-button">
+    <i class="fa fa-times"></i>
+</button>
+
+{{/*Map Box*/}}
+<div id="map"></div>
+
+{{template "bottom" .}}
