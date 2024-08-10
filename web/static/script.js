@@ -393,12 +393,7 @@ let piracy = L.geoJSON(null, {
 }
 }).addTo(map);
 
-// Async load GeoJSON data
-(async () => {
-const response = await fetch('./static/data/ASAM_events.geojson');
-    const data = await response.json();
-    piracy.addData(data);
-})();
+
 
 
 // Custom icon options
@@ -433,12 +428,7 @@ let worldSeaPort = L.geoJSON(null, {
     }
 }).addTo(map);
 
-// Async load GeoJSON data
-(async () => {
-const response = await fetch('./static/data/WPI.geojson');
-    const data = await response.json();
-    worldSeaPort.addData(data);
-})();
+
 
 
 
